@@ -1,7 +1,9 @@
+import random
+
 import pygame
 
 from settings import *
-from plant import RedPlant
+from plant import RedPlant, RedPlant2
 
 
 class FarmCell:
@@ -20,7 +22,9 @@ class FarmCell:
         self.last_clicked = pygame.time.get_ticks()
         if self.can_click:
             if not self.plant:
-                new_plant = RedPlant((self.rect.x, self.rect.y - CELL_HEIGHT // 2))
+                plants = [RedPlant((self.rect.x, self.rect.y - CELL_HEIGHT // 2)),
+                          RedPlant2((self.rect.x, self.rect.y - CELL_HEIGHT // 2))]
+                new_plant = random.choice(plants)
                 self.add_plant(new_plant)
             else:
                 if self.plant.stage == PLANT_MAX_STAGE - 1:
